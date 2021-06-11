@@ -8,31 +8,31 @@ Modify using the code from: https://github.com/facebookresearch/UnsupervisedDeco
 - Download, unzip QG data training at QG/SQG_model folder, link: https://drive.google.com/file/d/1zbBWRCC6YHGGyT4s2MGt9DUPMhXOoBLU/view?usp=sharing
 
 # Copy pretrained MLM model
-mkdir -p $MAIN_DIR/XLM/dumped/mlm.dev1.pseudo_decomp_random.mined
-wget https://dl.fbaipublicfiles.com/UnsupervisedDecomposition/dumped/mlm.dev1.pseudo_decomp_random.mined/best-valid_mlm_ppl.pth
-mv best-valid_mlm_ppl.pth dumped/mlm.dev1.pseudo_decomp_random.mined/
+> mkdir -p $MAIN_DIR/XLM/dumped/mlm.dev1.pseudo_decomp_random.mined
+> wget https://dl.fbaipublicfiles.com/UnsupervisedDecomposition/dumped/mlm.dev1.pseudo_decomp_random.mined/best-valid_mlm_ppl.pth
+> mv best-valid_mlm_ppl.pth dumped/mlm.dev1.pseudo_decomp_random.mined/
 # Copy pre-trained decomposition model
-mkdir -p dumped/umt.dev1.pseudo_decomp.replace_entity_by_type/20639223
-for FILE in best-valid_mh-sh-mh_mt_effective_goods_back_bleu.pth hyp.st=0.0.bs=5.lp=1.0.es=False.seed=0.mh-sh.train.pred.bleu.sh.txt hyp.st=0.0.bs=5.lp=1.0.es=False.seed=0.mh-sh.valid.pred.bleu.sh.txt; do
-    wget https://dl.fbaipublicfiles.com/UnsupervisedDecomposition/dumped/umt.dev1.pseudo_decomp.replace_entity_by_type/20639223/$FILE
-    mv $FILE dumped/umt.dev1.pseudo_decomp.replace_entity_by_type/20639223/
-done
+> mkdir -p dumped/umt.dev1.pseudo_decomp.replace_entity_by_type/20639223
+> for FILE in best-valid_mh-sh-mh_mt_effective_goods_back_bleu.pth hyp.st=0.0.bs=5.lp=1.0.es=False.seed=0.mh-sh.train.pred.bleu.sh.txt hyp.st=0.0.bs=5.lp=1.0.es=False.seed=0.mh-sh.valid.pred.bleu.sh.txt; do
+    > wget https://dl.fbaipublicfiles.com/UnsupervisedDecomposition/dumped/umt.dev1.pseudo_decomp.replace_entity_by_type/20639223/$FILE
+    > mv $FILE dumped/umt.dev1.pseudo_decomp.replace_entity_by_type/20639223/
+> done
 # Copy single-hop question answering model ensemble
-for NUM_PARAGRAPHS in 1 3; do
-    mkdir -p checkpoint/roberta_large.hotpot_easy_and_squad.num_paragraphs=$NUM_PARAGRAPHS/
-    for FILE in config.json pytorch_model.bin training_args.bin; do
-        wget https://dl.fbaipublicfiles.com/UnsupervisedDecomposition/checkpoint/roberta_large.hotpot_easy_and_squad.num_paragraphs=$NUM_PARAGRAPHS/$FILE
-        mv $FILE checkpoint/roberta_large.hotpot_easy_and_squad.num_paragraphs=$NUM_PARAGRAPHS/
-    done
-done
+> for NUM_PARAGRAPHS in 1 3; do
+    > mkdir -p checkpoint/roberta_large.hotpot_easy_and_squad.num_paragraphs=$NUM_PARAGRAPHS/
+    > for FILE in config.json pytorch_model.bin training_args.bin; do
+        > wget https://dl.fbaipublicfiles.com/UnsupervisedDecomposition/checkpoint/roberta_large.hotpot_easy_and_squad.num_paragraphs=$NUM_PARAGRAPHS/$FILE
+        > mv $FILE checkpoint/roberta_large.hotpot_easy_and_squad.num_paragraphs=$NUM_PARAGRAPHS/
+    > done
+> done
 
 # Download FastText vectors for creating pseudo-decompositions
-mkdir -p data/fastText
-wget https://dl.fbaipublicfiles.com/fasttext/vectors-english/crawl-300d-2M.vec.zip
-unzip crawl-300d-2M.vec.zip
-mv crawl-300d-2M.vec data/fastText/
-rm crawl-300d-2M.vec.zip
-cd $MAIN_DIR
+> mkdir -p data/fastText
+> wget https://dl.fbaipublicfiles.com/fasttext/vectors-english/crawl-300d-2M.vec.zip
+> unzip crawl-300d-2M.vec.zip
+> mv crawl-300d-2M.vec data/fastText/
+> rm crawl-300d-2M.vec.zip
+> cd $MAIN_DIR
 
 
 - Step 1: Install requirements package
